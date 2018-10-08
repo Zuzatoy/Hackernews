@@ -42,7 +42,14 @@ class App extends Component {
       cars: cars
 
     };
+    this.onDismiss = this.onDismiss.bind(this);
   }
+
+  onDismiss(id) {
+    const updatedList = this.state.list.filter(item => item.objectID !== id);
+    this.setState({ list: updatedList });
+  }
+
   render() {
     return (
       <div className="App">
@@ -50,6 +57,12 @@ class App extends Component {
           <div key ={car.title} >
             <span>{car.title}</span>
             <span>{car.color}</span>
+            {/* <span>
+              <button onClick={() => this.onDismiss(car.title)}
+              >
+              Dismiss
+              </button>
+            </span> */}
           </div>
         )}
 
@@ -61,6 +74,13 @@ class App extends Component {
             <span>{item.author}</span>
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
+            <span>
+              <button onClick={() => this.onDismiss(item.ob)}
+              >
+              Dismiss
+              </button>
+            </span>
+
       </div> 
             )       }
     </div> );
