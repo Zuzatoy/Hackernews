@@ -1,1 +1,1 @@
-Exercise from the book "The road to learn react"
+Exercises from the book "The road to learn react"
