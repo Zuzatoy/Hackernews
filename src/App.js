@@ -46,7 +46,8 @@ class App extends Component {
   }
 
   onDismiss(id) {
-    const updatedList = this.state.list.filter(item => item.objectID !== id);
+    const isNotId = item => item.objectID !== id;
+    const updatedList = this.state.list.filter(isNotId);
     this.setState({ list: updatedList });
   }
 
@@ -75,7 +76,8 @@ class App extends Component {
             <span>{item.num_comments}</span>
             <span>{item.points}</span>
             <span>
-              <button onClick={() => this.onDismiss(item.ob)}
+              <button onClick={() => this.onDismiss(item.objectID)}
+              type='button'
               >
               Dismiss
               </button>
