@@ -2,37 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-const list = [
-  {
-    title: 'React',
-    url: 'https://reactjs.org/',
-    author: 'Jordan Walke',
-    num_comments: 3,
-    points: 4,
-    objectID: 0,
-}, {
-    title: 'Redux',
-    url: 'https://redux.js.org/',
-    author: 'Dan Abramov, Andrew Clark',
-    num_comments: 2,
-    points: 5,
-    objectID: 1,
-}, ];
-
-const cars = [
-  {
-    title: 'Mazda',
-    color: 'red',
-    brand: 'new'
-  },
-  {
-    title: 'Toyota',
-    color: 'brown',
-    brand: 'old'
-  }
-]
-
-
 
 const DEFAULT_QUERY = 'redux';
 const DEFAULT_HPP = '100';
@@ -54,7 +23,6 @@ class App extends Component {
       results: null,
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
-      error: null,
 
     };
 
@@ -99,7 +67,7 @@ class App extends Component {
 
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(error => this.setState({ error }));
+      .catch(error => error);
 }
 
 
@@ -143,8 +111,7 @@ class App extends Component {
     const {
       searchTerm,
       results,
-      searchKey,
-      error
+      searchKey
        } = this.state;
     const page = (
       results &&
@@ -155,8 +122,7 @@ class App extends Component {
       results &&
       results[searchKey] &&
       results[searchKey].hits
-      )   || [];
-
+)       || [];
 
     return (
       <div className="page">
@@ -167,22 +133,16 @@ class App extends Component {
             onSubmit={this.onSearchSubmit}
           > Search
           </Search>
-          </div>
-          { error
-            ? <div className="interactions">
-            <p>Something went wrong.</p>
-            </div>
-            : <Table
+          <Table
             list={list}
             onDismiss={this.onDismiss}
             />
-          }
         <div className="interactions">
             <Button onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
                 More
             </Button>
         </div>
-        
+        </div>
         </div>
         ); 
       }
@@ -205,10 +165,6 @@ const Search = ({
         </button>
       </form>
     
-  
-
-
-export default App;
 
 
 const Table = ({ list, onDismiss }) =>  
@@ -260,3 +216,4 @@ const Button = ( {onClick, className, children }) =>
       </button>
     
   
+    export default App;
